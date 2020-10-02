@@ -190,12 +190,12 @@ do
 done
 
 # Default A/B configuration flag for all QSSI targets (not used for legacy targets).
-ENABLE_AB=${ENABLE_AB:-true}
+ENABLE_AB=false
 ARGS="$@"
 QSSI_ARGS="$ARGS ENABLE_AB=$ENABLE_AB"
 
 #This flag control system_ext logical partition enablement
-SYSTEMEXT_SEPARATE_PARTITION_ENABLE=true
+SYSTEMEXT_SEPARATE_PARTITION_ENABLE=false
 QSSI_ARGS="$QSSI_ARGS SYSTEMEXT_SEPARATE_PARTITION_ENABLE=$SYSTEMEXT_SEPARATE_PARTITION_ENABLE"
 
 # OTA/Dist related variables
@@ -208,7 +208,7 @@ ENABLE_VIRTUAL_AB=false
 # OTA/Dist related variaibles
 QSSI_OUT="out/target/product/$TARGET_QSSI"
 DIST_COMMAND="dist"
-DIST_ENABLED=false
+DIST_ENABLED=true
 QSSI_ARGS_WITHOUT_DIST=""
 DIST_DIR="out/dist"
 MERGED_TARGET_FILES="$DIST_DIR/merged-qssi_${TARGET_PRODUCT}-target_files.zip"
@@ -250,6 +250,8 @@ do
 done
 
 # Pass Dynamic Partition and virtual-ab flags
+BOARD_DYNAMIC_PARTITION_ENABLE=false
+ENABLE_VIRTUAL_AB=false
 QSSI_ARGS="$QSSI_ARGS BOARD_DYNAMIC_PARTITION_ENABLE=$BOARD_DYNAMIC_PARTITION_ENABLE ENABLE_VIRTUAL_AB=$ENABLE_VIRTUAL_AB"
 
 # Set Shipping API level on target basis.
@@ -264,6 +266,7 @@ do
         break
     fi
 done
+SHIPPING_API_LEVEL=28
 QSSI_ARGS="$QSSI_ARGS SHIPPING_API_LEVEL=$SHIPPING_API_LEVEL"
 
 for ARG in $QSSI_ARGS
