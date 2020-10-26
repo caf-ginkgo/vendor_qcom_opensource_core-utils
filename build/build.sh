@@ -112,6 +112,8 @@ TARGET_ONLY=0
 FULL_BUILD=0
 BUILDTYPE="gapps"
 
+unset VANILLA_BUILD
+
 while [[ $# -gt 0 ]]
     do
     arg="$1"
@@ -131,6 +133,7 @@ while [[ $# -gt 0 ]]
         *vanilla)
             BUILDTYPE="vanilla"
             MAKE_ARGUMENTS+=("VANILLA_BUILD=true")
+            export VANILLA_BUILD=true
             shift
             ;;
         *)  # all other option
